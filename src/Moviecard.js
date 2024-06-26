@@ -1,7 +1,17 @@
 import { Component } from "react";
 
 class Moviecard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      title: "Titanic",
+      plot: "The adventurous sink of titanic ship",
+      price: "Rs 199 /-",
+      rating: 8.8,
+    };
+  }
   render() {
+    const { title, plot, price, rating } = this.state;
     return (
       <div className="main">
         <div className="movie-card">
@@ -13,9 +23,9 @@ class Moviecard extends Component {
           </div>
 
           <div className="right">
-            <div className="title">Titanic</div>
-            <div className="plot"> The adventurous sink of titanic ship </div>
-            <div className="price">Rs. 199 /-</div>
+            <div className="title">{title}</div>
+            <div className="plot"> {this.state.plot} </div>
+            <div className="price">{price}</div>
 
             <div className="footer">
               <div className="rating">4.5</div>
