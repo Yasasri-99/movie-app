@@ -8,10 +8,40 @@ class Moviecard extends Component {
       plot: "The adventurous sink of titanic ship",
       price: "Rs 199 /-",
       rating: 8.8,
+      stars: 0,
     };
+    // this.addStars = this.addStars.bind(this);
   }
+  addStars = () => {
+    console.log("this : ", this);
+    if (this.state.stars >= 5) {
+      return;
+    }
+    //form1
+    // this.setState({
+    //   stars: this.state.stars + 0.5,
+    // });
+    //form2
+    this.setState((prevState) => {
+      return {
+        stars: prevState.stars + 0.5,
+      };
+    });
+
+    //this.state.stars += 0.5;
+    // console.log("this.state.stars : ",this.state.stars);
+  };
+  decStars = () => {
+    if (this.state.stars <= 0) {
+      return;
+    }
+    this.setState({
+      stars: this.state.stars - 0.5,
+    });
+  };
+
   render() {
-    const { title, plot, price, rating } = this.state;
+    const { title, plot, price, rating, stars } = this.state;
     return (
       <div className="main">
         <div className="movie-card">
@@ -34,6 +64,7 @@ class Moviecard extends Component {
                   className="str-btn"
                   alt="decrease"
                   src="https://cdn-icons-png.flaticon.com/128/43/43625.png"
+                  onClick={this.decStars.bind(this)}
                 />
                 <img
                   alt="star"
@@ -44,8 +75,9 @@ class Moviecard extends Component {
                   className="str-btn"
                   alt="increase"
                   src="https://cdn-icons-png.flaticon.com/128/748/748113.png"
+                  onClick={this.addStars.bind(this)}
                 />
-                <span>0</span>
+                <span className="starCount">{stars}</span>
               </div>
               <button className="favourite-btn">Favoutite</button>
               <button className="cart-btn">Add to cart</button>
