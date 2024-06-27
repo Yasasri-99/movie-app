@@ -13,7 +13,6 @@ class Moviecard extends Component {
     // this.addStars = this.addStars.bind(this);
   }
   addStars = () => {
-    console.log("this : ", this);
     if (this.state.stars >= 5) {
       return;
     }
