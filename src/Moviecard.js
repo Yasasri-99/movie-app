@@ -1,18 +1,19 @@
 import { Component } from "react";
 
 class Moviecard extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: "Titanic",
-      plot: "The adventurous sink of titanic ship",
-      price: "Rs 199 /-",
-      rating: 8.8,
-      stars: 0,
-      fav: true,
-    };
-    // this.addStars = this.addStars.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     title: "Titanic",
+  //     plot: "The adventurous sink of titanic ship",
+  //     price: "Rs 199 /-",
+  //     rating: 8.8,
+  //     stars: 0,
+  //     fav: true,
+  //     isIncart: true,
+  //   };
+  // this.addStars = this.addStars.bind(this);------
+  // }
   addStars = () => {
     if (this.state.stars >= 5) {
       return;
@@ -45,21 +46,25 @@ class Moviecard extends Component {
       fav: !this.state.fav,
     });
   };
+
+  handleAddToCart = () => {
+    this.setState({
+      isIncart: !this.state.isIncart,
+    });
+  };
   render() {
-    const { title, plot, price, rating, stars, fav } = this.state;
+    const { title, plot, price, rating, poster, stars, fav, isIncart } =
+      this.props.movies;
     return (
       <div className="main">
         <div className="movie-card">
           <div className="left">
-            <img
-              alt="Poster"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNRxxkYHTzu-T5l-jHg9UjEsMBjvZMXkAlXQ&s"
-            />
+            <img alt="Poster" src={poster} />
           </div>
 
           <div className="right">
             <div className="title">{title}</div>
-            <div className="plot"> {this.state.plot} </div>
+            <div className="plot"> {plot} </div>
             <div className="price">{price}</div>
 
             <div className="footer">
@@ -100,8 +105,12 @@ class Moviecard extends Component {
               >
                 {fav ? "Unfavoutite" : "Favoutite"}
               </button> */}
-
-              <button className="cart-btn">Add to cart</button>
+              <button
+                className={isIncart ? "unfavourite-btn" : "cart-btn"}
+                onClick={this.handleAddToCart}
+              >
+                {isIncart ? "Remove from cart" : "Add to cart"}
+              </button>
             </div>
           </div>
         </div>
