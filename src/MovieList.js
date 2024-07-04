@@ -53,25 +53,64 @@ class MovieList extends Component {
       ],
     };
   }
+  handleAddStars = (movie) => {
+    const { movies } = this.state;
+    const movieId = movies.indexOf(movie);
+    if (movies[movieId].stars < 5) {
+      movies[movieId].stars += 0.5;
+    }
+    this.setState({
+      movies,
+    });
+  };
+  handleDecStars = (movie) => {
+    const { movies } = this.state;
+    const movieId = movies.indexOf(movie);
+    if (movies[movieId].stars < 5) {
+      movies[movieId].stars -= 0.5;
+    }
+    this.setState({
+      movies,
+    });
+  };
+  handleToggleFav = (movie) => {
+    const { movies } = this.state;
+    const movieId = movies.indexOf(movie);
+
+    movies[movieId].fav = !movies[movieId].fav;
+
+    this.setState({
+      movies,
+    });
+  };
+
+  handleAddtocart = (movie) => {
+    const { movies } = this.state;
+    const movieId = movies.indexOf(movie);
+
+    movies[movieId].isInCart = !movies[movieId].isInCart;
+
+    this.setState({
+      movies,
+    });
+  };
+
   render() {
     // const { title, plot, price, rating, stars, fav, isIncart, poster } =this.state.movies;
     const { movies } = this.state;
     return (
-      <>
-        {movies.map((movie) => (
-          <Moviecard movies={movie} />
+      <div className="main">
+        {movies.map((movie, index) => (
+          <Moviecard
+            movies={movie}
+            key={index}
+            onIncStars={this.handleAddStars}
+            onDecStars={this.handleDecStars}
+            onClickFav={this.handleToggleFav}
+            onClickAddtocart={this.handleAddtocart}
+          />
         ))}
-        {/* <Moviecard
-          title={title}
-          plot={plot}
-          price={price}
-          rating={rating}
-          stars={stars}
-          fav={fav}
-          isIncart={isIncart}
-        /> ---------passing individually */}
-        {/* <Moviecard movies={this.state} /> */}
-      </>
+      </div>
     );
   }
 }

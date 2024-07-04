@@ -14,47 +14,50 @@ class Moviecard extends Component {
   //   };
   // this.addStars = this.addStars.bind(this);------
   // }
-  addStars = () => {
-    if (this.state.stars >= 5) {
-      return;
-    }
-    //form1
-    // this.setState({
-    //   stars: this.state.stars + 0.5,
-    // });
-    //form2
-    this.setState((prevState) => {
-      return {
-        stars: prevState.stars + 0.5,
-      };
-    });
+  // addStars = () => {
+  //   if (this.state.stars >= 5) {
+  //     return;
+  //   }
+  //   //form1----------
+  //   // this.setState({---------
+  //   //   stars: this.state.stars + 0.5,-------
+  //   // });-------
+  //   //form2-----
+  //   this.setState((prevState) => {
+  //     return {
+  //       stars: prevState.stars + 0.5,
+  //     };
+  //   });
 
-    //this.state.stars += 0.5;
-    // console.log("this.state.stars : ",this.state.stars);
-  };
-  decStars = () => {
-    if (this.state.stars <= 0) {
-      return;
-    }
-    this.setState({
-      stars: this.state.stars - 0.5,
-    });
-  };
+  //   //this.state.stars += 0.5;----------
+  //   // console.log("this.state.stars : ",this.state.stars);-------
+  // };
+  // decStars = () => {
+  //   if (this.state.stars <= 0) {
+  //     return;
+  //   }
+  //   this.setState({
+  //     stars: this.state.stars - 0.5,
+  //   });
+  // };
 
-  handleFav = () => {
-    this.setState({
-      fav: !this.state.fav,
-    });
-  };
+  // handleFav = () => {
+  //   this.setState({
+  //     fav: !this.state.fav,
+  //   });
+  // };
 
-  handleAddToCart = () => {
-    this.setState({
-      isIncart: !this.state.isIncart,
-    });
-  };
+  // handleAddToCart = () => {
+  //   this.setState({
+  //     isIncart: !this.state.isIncart,
+  //   });
+  // };
   render() {
-    const { title, plot, price, rating, poster, stars, fav, isIncart } =
+    const { movies, onIncStars, onClickFav, onClickAddtocart, onDecStars } =
+      this.props;
+    const { title, plot, poster, price, rating, stars, fav, isIncart } =
       this.props.movies;
+
     return (
       <div className="main">
         <div className="movie-card">
@@ -68,13 +71,14 @@ class Moviecard extends Component {
             <div className="price">{price}</div>
 
             <div className="footer">
-              <div className="rating">4.5</div>
+              <div className="rating">{rating}</div>
               <div className="star-dis">
                 <img
                   className="str-btn"
                   alt="decrease"
                   src="https://cdn-icons-png.flaticon.com/128/43/43625.png"
-                  onClick={this.decStars.bind(this)}
+                  // onClick={this.decStars.bind(this)}
+                  onClick={() => onDecStars(movies)}
                 />
                 <img
                   alt="star"
@@ -85,12 +89,13 @@ class Moviecard extends Component {
                   className="str-btn"
                   alt="increase"
                   src="https://cdn-icons-png.flaticon.com/128/748/748113.png"
-                  onClick={this.addStars.bind(this)}
+                  // onClick={this.addStars.bind(this)}
+                  onClick={() => onIncStars(movies)}
                 />
                 <span className="starCount">{stars}</span>
               </div>
 
-              {fav ? (
+              {/* {fav ? (
                 <button className="unfavourite-btn" onClick={this.handleFav}>
                   Unfavoutite
                 </button>
@@ -98,16 +103,19 @@ class Moviecard extends Component {
                 <button className="favourite-btn" onClick={this.handleFav}>
                   Favoutite
                 </button>
-              )}
-              {/* <button
+              )} */}
+              <button
                 className={fav ? "unfavourite-btn" : "favourite-btn"}
-                onClick={this.handleFav}
+                // onClick={this.handleFav}
+                onClick={() => onClickFav(movies)}
               >
                 {fav ? "Unfavoutite" : "Favoutite"}
-              </button> */}
+              </button>
+
               <button
                 className={isIncart ? "unfavourite-btn" : "cart-btn"}
-                onClick={this.handleAddToCart}
+                // onClick={this.handleAddToCart}
+                onClick={() => onClickAddtocart(movies)}
               >
                 {isIncart ? "Remove from cart" : "Add to cart"}
               </button>
