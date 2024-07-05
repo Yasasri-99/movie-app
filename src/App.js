@@ -1,10 +1,11 @@
 import MovieList from "./MovieList";
 import "./index.css";
+import Navbar from "./Navbar";
 
 function App() {
   return (
     <>
-      <h1>Movie App</h1>
+      <Navbar />
       <MovieList />
     </>
   );
